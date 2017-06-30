@@ -58,6 +58,16 @@ void mapGeneration::saveWorkspace()
   ROS_INFO("%s saved to %s", filename.c_str(), path_.c_str());
  }
 
+void mapGeneration::getArmPose(geometry_msgs::Pose& arm_pose)
+{
+  std::vector<std::string> link_names = group_->getLinkNames();
+  std::string first_link = link_names[0];
+  moveit::core::RobotModelConstPtr robot_model = group_->getRobotModel();
+  moveit::core::RobotStatePtr robot_state(new moveit::core::RobotState(robot_model));
+  Eigen::Affine3d tf_root_to_first_link = robot_state->getGlobalLinkTransform(first_link);
+  tf::poseEigenToMsg(tf_root_to_first_link, arm_pose);
+}
+  
 void mapGeneration::generate()
 {
   ros::Time startit = ros::Time::now();
@@ -73,16 +83,6 @@ void mapGeneration::generate()
   ROS_INFO("Initial workspace has %d spheres and %d poses", init_sp_size_, init_pose_size_);
   ROS_INFO("Final workspace has %d spheres and %d poses", final_sp_size_, final_pose_size_);
   ROS_INFO("Completed");
-}
-
-void mapGeneration::getArmPose(geometry_msgs::Pose& arm_pose)
-{
-  std::vector<std::string> link_names = group_->getLinkNames();
-  std::string first_link = link_names[0];
-  moveit::core::RobotModelConstPtr robot_model = group_->getRobotModel();
-  moveit::core::RobotStatePtr robot_state(new moveit::core::RobotState(robot_model));
-  Eigen::Affine3d tf_root_to_first_link = robot_state->getGlobalLinkTransform(first_link);
-  tf::poseEigenToMsg(tf_root_to_first_link, arm_pose);
 }
 
 }
