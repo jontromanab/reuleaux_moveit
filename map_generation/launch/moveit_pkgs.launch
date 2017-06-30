@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+<arg name ="moveit_pkg" />
+  <node name="moveit_req" pkg="map_generation" type="helper.bash"  output="screen" args="$(arg moveit_pkg)"/>
+</launch>

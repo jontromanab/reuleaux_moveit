@@ -1,0 +1,12 @@
+<launch>
+<include file="$(find fetch_moveit_config)/launch/planning_context.launch">
+   <arg name="load_robot_description" value="true" />
+</include>
+
+<!--node name="create_reachability" pkg="map_generation"
+            type="create_reachability"
+            respawn="false" output="screen">
+ <rosparam command = "load" file="$(find pr2_moveit_config)/config/kinematics.yaml" />
+ </node-->
+
+</launch>

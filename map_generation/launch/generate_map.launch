@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+<!--set you robot's moveit pkg here-->
+<arg name = "moveit_pkg" default="fetch_moveit_config"/>
+
+<!--Launch moveit required pkgs for your robot-->
+<include file="$(find map_generation)/launch/moveit_pkgs.launch">
+    <arg name="moveit_pkg" value="$(arg moveit_pkg)"/>
+</include>
+
+
+
+<!--Node for map generation-->
+<node name="map_gen" pkg="map_generation" type="map_generation_node" output="screen">
+  <param name="group_name" value="arm" />
+  <param name="pkg_name" value="$(arg moveit_pkg)"/>
+  <param name="resolution" value="0.08" />
+  <param name="radius" value="1" />
+  <param name="check_collision" value="true"/>
+  <param name="path" value="$(find map_generation)/maps/" />
+  <param name="filename" value="default" />
+
+</node>
+
+
+
+</launch>
