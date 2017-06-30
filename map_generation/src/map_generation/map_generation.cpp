@@ -80,11 +80,6 @@ void mapGeneration::getArmPose(geometry_msgs::Pose& arm_pose)
   std::vector<std::string> link_names = group_->getLinkNames();
   std::string first_link = link_names[0];
   moveit::core::RobotModelConstPtr robot_model = group_->getRobotModel();
-  geometry_msgs::Pose new_pose;
-  new_pose.position.x = 0.0;
-  new_pose.position.y = 0.0;
-  new_pose.position.z = 0.75;
-  new_pose.orientation.w = 1.0;
   moveit::core::RobotStatePtr robot_state(new moveit::core::RobotState(robot_model));
   Eigen::Affine3d tf_root_to_first_link = robot_state->getGlobalLinkTransform(first_link);
   tf::poseEigenToMsg(tf_root_to_first_link, arm_pose);
