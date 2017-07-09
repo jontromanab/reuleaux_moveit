@@ -199,6 +199,7 @@ ReachAbility::ReachAbility(ros::NodeHandle& node, std::string group_name, bool c
      }
    final_ws_.WsSpheres.push_back(wss);
    }
+   final_ws_.resolution = init_ws_.resolution;
  }
 
 }
