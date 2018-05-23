@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(map_generation)
 
+add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp message_generation  eigen_conversions  geometry_msgs tf moveit_ros_planning_interface  moveit_core)
@@ -52,7 +53,7 @@ include_directories(
  target_link_libraries(discretization  ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES})
  target_link_libraries(utility  ${catkin_LIBRARIES})
  target_link_libraries(reachability  ${catkin_LIBRARIES} utility)
- target_link_libraries(dataset  ${catkin_LIBRARIES} -lhdf5 -lhdf5_cpp utility)
+ target_link_libraries(dataset  ${catkin_LIBRARIES} hdf5_serial hdf5_cpp utility)
  target_link_libraries(map_generation  ${catkin_LIBRARIES} discretization utility reachability dataset)
 
 
