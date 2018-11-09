@@ -1,4 +1,4 @@
-#include<map_generation/discretization.h>
+#include <map_generation/discretization.h>
 
 
 namespace reuleaux
@@ -145,4 +145,4 @@ void Discretization::getCenters(std::vector<geometry_msgs::Point> &points)
   points = centers_;
 }
 
-}//end namespace reuleaux
+} //end namespace reuleaux

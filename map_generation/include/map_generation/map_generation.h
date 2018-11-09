@@ -8,7 +8,8 @@
 #include<map_generation/hdf5_dataset.h>
 #include<map_generation/WorkSpace.h>
 
-#include<moveit/move_group_interface/move_group.h>
+//#include<moveit/move_group_interface/move_group.h>
+#include <moveit/move_group_interface/move_group_interface.h>
 #include<moveit/robot_state/robot_state.h>
 #include <Eigen/Eigen>
 #include <eigen_conversions/eigen_msg.h>
@@ -40,7 +41,7 @@ private:
    double radius_;
    bool check_collision_;
 
-   boost::scoped_ptr<moveit::planning_interface::MoveGroup> group_;
+   boost::scoped_ptr<moveit::planning_interface::MoveGroupInterface> group_;
    geometry_msgs::Pose arm_pose_;
    map_generation::WorkSpace init_ws_;
    map_generation::WorkSpace filtered_ws_;

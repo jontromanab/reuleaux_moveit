@@ -1,4 +1,4 @@
-#include<map_generation/utility.h>
+#include <map_generation/utility.h>
 
 namespace reuleaux
 {

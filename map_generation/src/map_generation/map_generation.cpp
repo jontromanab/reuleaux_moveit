@@ -1,4 +1,4 @@
-#include<map_generation/map_generation.h>
+#include <map_generation/map_generation.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -16,7 +16,7 @@ mapGeneration::mapGeneration(ros::NodeHandle& node, const std::string &group_nam
   resolution_ = resolution;
   radius_ = radius;
   check_collision_= check_collision;
-  group_.reset(new moveit::planning_interface::MoveGroup(group_name_));
+  group_.reset(new moveit::planning_interface::MoveGroupInterface(group_name_));
   init_ws_.WsSpheres.clear();
   filtered_ws_.WsSpheres.clear();
 }

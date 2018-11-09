@@ -1,15 +1,15 @@
 #ifndef DISCRETIZATION_H
 #define DISCRETIZATION_H
 
-#include<geometry_msgs/Pose.h>
-#include<geometry_msgs/Point.h>
-#include<octomap/octomap.h>
-#include<octomap/MapCollection.h>
-#include<octomap/math/Utils.h>
-#include<map_generation/WorkSpace.h>
-#include<tf/LinearMath/Quaternion.h>
+#include <geometry_msgs/Pose.h>
+#include <geometry_msgs/Point.h>
+#include <octomap/octomap.h>
+#include <octomap/MapCollection.h>
+#include <octomap/math/Utils.h>
+#include <map_generation/WorkSpace.h>
+#include <tf/LinearMath/Quaternion.h>
 
-namespace  reuleaux
+namespace reuleaux
 {
 
 class Discretization

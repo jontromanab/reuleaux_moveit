@@ -7,7 +7,7 @@ ReachAbility::ReachAbility(ros::NodeHandle& node, std::string group_name, bool c
 {
   nh_ = node;
   client_ = nh_.serviceClient<moveit_msgs::GetPositionIK>("/compute_ik");
-  group_.reset(new moveit::planning_interface::MoveGroup(group_name_));
+  group_.reset(new moveit::planning_interface::MoveGroupInterface(group_name_));
   planning_frame_ = group_->getPlanningFrame();
   final_ws_.WsSpheres.clear();
   init_ws_.WsSpheres.clear();

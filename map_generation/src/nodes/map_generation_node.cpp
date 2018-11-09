@@ -1,5 +1,6 @@
 #include <ros/ros.h>
-#include<map_generation/map_generation.h>
+#include <map_generation/map_generation.h>
+
 
 
 int main(int argc, char **argv)
@@ -25,8 +26,5 @@ int main(int argc, char **argv)
   mg.generate();
 
   ros::spin();
-
-
-
-
+  return 0;
 }
