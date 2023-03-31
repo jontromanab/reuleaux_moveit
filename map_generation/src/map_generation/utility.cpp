@@ -1,5 +1,4 @@
 #include <map_generation/utility.h>
-#include <boost/format.hpp>
 
 namespace reuleaux
 {
