@@ -28,7 +28,7 @@ ReachAbility::ReachAbility(ros::NodeHandle& node, std::string group_name, bool c
    geometry_msgs::PoseStamped pose_st = makePoseStamped(pose_in);
    req.group_name = group_name_;
    req.avoid_collisions = check_collision_;
-   req.attempts = 10;
+   // req.attempts = 10;
    req.timeout.fromSec(0.1);
    req.pose_stamped = pose_st;
    return req;
