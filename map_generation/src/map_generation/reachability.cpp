@@ -80,6 +80,10 @@ ReachAbility::ReachAbility(ros::NodeHandle& node, std::string group_name, bool c
 
  bool ReachAbility::getIKSolution(const geometry_msgs::Pose &pose, moveit_msgs::RobotState &robot_state)
  {
+   ROS_DEBUG("===============================");
+   ROS_DEBUG("Requesting IK solution for...");
+   ROS_DEBUG("Position: x: %f y: %f z: %f", pose.position.x, pose.position.y, pose.position.z);
+   ROS_DEBUG("Orientation: qx: %f qy: %f qz: %f qw: %f", pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w);
    moveit_msgs::PositionIKRequest req = makeServiceRequest(pose);
    if(ik(req, robot_state))
      return true;
@@ -166,10 +170,14 @@ ReachAbility::ReachAbility(ros::NodeHandle& node, std::string group_name, bool c
        bool is_reachable = getIKSolution(reach_pose, state);
        if(is_reachable)
        {
+         ROS_DEBUG("SUCCESS: Pose was reached!");
          std::vector<double> sp_pose;
          reuleaux::poseToVector(reach_pose, sp_pose);
          ws_map.insert(std::make_pair(sp_vec, sp_pose));
+       } else {
+         ROS_DEBUG("FAIL: Pose was not reached");
        }
+       ROS_DEBUG("===============================");
      }
    }
    for(reuleaux::MultiMap::iterator it=ws_map.begin(); it!=ws_map.end();++it)
@@ -200,6 +208,8 @@ ReachAbility::ReachAbility(ros::NodeHandle& node, std::string group_name, bool c
    final_ws_.WsSpheres.push_back(wss);
    }
    final_ws_.resolution = init_ws_.resolution;
- }
 
+   // Added as there was no return from this function, not sure if there ought to be a false case...
+   return true;
+ }
 }

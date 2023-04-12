@@ -53,7 +53,15 @@ void mapGeneration::saveWorkspace()
   else
     filename = filename_;
   name = path_+filename;
+
+  // ROS_INFO(name);
+  std::cout << name << std::endl;
+
+  // Failing here...
+  ROS_INFO("Failing at this line...");
   reuleaux::Hdf5Dataset* h5(new reuleaux::Hdf5Dataset(name));
+  ROS_INFO("I never get here");
+
   h5->save(filtered_ws_);
   ROS_INFO("%s saved to %s", filename.c_str(), path_.c_str());
  }
@@ -76,6 +84,8 @@ void mapGeneration::generate()
   double dif2 = ros::Duration( ros::Time::now() - startit).toSec();
   filterWorkspace();
   double dif3 = ros::Duration( ros::Time::now() - startit).toSec();
+
+  // Issue here now...
   saveWorkspace();
   ROS_INFO("Time for discretizing workspace %.2lf seconds.", dif2);
   ROS_INFO("Center of workspace   x:%f, y:%f, z:%f", arm_pose_.position.x, arm_pose_.position.y, arm_pose_.position.z);
