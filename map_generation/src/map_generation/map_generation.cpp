@@ -54,14 +54,7 @@ void mapGeneration::saveWorkspace()
     filename = filename_;
   name = path_+filename;
 
-  // ROS_INFO(name);
-  std::cout << name << std::endl;
-
-  // Failing here...
-  ROS_INFO("Failing at this line...");
   reuleaux::Hdf5Dataset* h5(new reuleaux::Hdf5Dataset(name));
-  ROS_INFO("I never get here");
-
   h5->save(filtered_ws_);
   ROS_INFO("%s saved to %s", filename.c_str(), path_.c_str());
  }
