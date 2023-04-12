@@ -53,6 +53,7 @@ geometry_msgs::Pose vectorToPose(const std::vector<double>& data)
   pose.orientation.z = data[5];
   pose.orientation.w = data[6];
 
+  return pose;
 }
 
 void getPoseAndSphereSize(const map_generation::WorkSpace &ws, int &sphere_size, int &pose_size)
