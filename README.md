@@ -57,7 +57,7 @@ To load an existing map...
 roslaunch map_generation panda_demo.launch create_map:=false
 ```
 
-Note that the map to be loaded is currently not parameterised, so needs to be changed in the launch file itself. The default is to load `map_generation/maps/panda_panda_arm_0.1_reachability.h5`
+Note that the map to be loaded is currently not parameterised, so needs to be changed in the launch file itself. The default is to load `map_generation/maps/panda_panda_arm_0.2_reachability.h5`
 
 
 ![col](img/panda_reach_demo.png)

@@ -350,9 +350,9 @@ Visualization Manager:
       Queue Size: 10
       Shape: Sphere
       Shape Property:
-        Alpha: 0.75
+        Alpha: 0.5
         Color: 255; 225; 102
-        Size: 0.02500000037252903
+        Size: 0.05000000074505806
       Show Poses: false
       Show Shape: true
       Topic: /reachability_map
@@ -374,7 +374,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 2.609900712966919
+      Distance: 3.7644386291503906
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -382,17 +382,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.03245115280151367
-        Y: 0.04636174440383911
+        X: 0.013513922691345215
+        Y: 0.012498676776885986
         Z: 2.384185791015625e-07
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5647974014282227
+      Pitch: 0.3047977685928345
       Target Frame: panda_link0
-      Yaw: 1.2817705869674683
+      Yaw: 1.1217677593231201
     Saved: ~
 Window Geometry:
   Displays:
