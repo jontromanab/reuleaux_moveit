@@ -31,7 +31,7 @@
         <node name="map_gen" pkg="map_generation" type="map_generation_node" output="screen">
           <param name="group_name" value="panda_arm" />
           <param name="pkg_name" value="$(arg moveit_pkg)"/>
-          <param name="resolution" value="0.1" />
+          <param name="resolution" value="0.2" />
           <param name="radius" value="1" />
           <param name="check_collision" value="true"/>
           <param name="path" value="$(find map_generation)/maps/" />

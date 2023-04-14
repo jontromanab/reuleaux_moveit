@@ -78,7 +78,6 @@ void mapGeneration::generate()
   filterWorkspace();
   double dif3 = ros::Duration( ros::Time::now() - startit).toSec();
 
-  // Issue here now...
   saveWorkspace();
   ROS_INFO("Time for discretizing workspace %.2lf seconds.", dif2);
   ROS_INFO("Center of workspace   x:%f, y:%f, z:%f", arm_pose_.position.x, arm_pose_.position.y, arm_pose_.position.z);
