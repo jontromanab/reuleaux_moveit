@@ -31,7 +31,7 @@
         <node name="map_gen" pkg="map_generation" type="map_generation_node" output="screen">
           <param name="group_name" value="panda_arm" />
           <param name="pkg_name" value="$(arg moveit_pkg)"/>
-          <param name="resolution" value="0.2" />
+          <param name="resolution" value="0.1" />
           <param name="radius" value="1" />
           <param name="check_collision" value="true"/>
           <param name="path" value="$(find map_generation)/maps/" />
@@ -48,7 +48,7 @@
         <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_2_panda_link0" args="0 0 0 0 0 0 panda_link0 base_link" />
 
         <!-- Use the original Reuleaux package's map loader -->
-        <node pkg="map_creator" type="load_reachability_map" name="reachability_map_loader" args="$(find map_generation)/maps/panda_panda_arm_0.2_reachability.h5" />
+        <node pkg="map_creator" type="load_reachability_map" name="reachability_map_loader" args="$(find map_generation)/maps/panda_panda_arm_0.15_reachability.h5" />
 
         <!-- RViz -->
         <node name="rviz" pkg="rviz" type="rviz" args="-d $(find map_generation)/config/panda_demo.rviz" />
