@@ -24,7 +24,7 @@ git clone --branch noetic-devel https://github.com/MShields1986/reuleaux.git
 
 3. Clone this package, again working in you catkin_ws/src directory...
 ```bash
-git clone --branch noetic-devel https://github.com/MShields1986/reuleaux_moveit.git
+git clone https://github.com/jontromanab/reuleaux_moveit.git
 ```
 
 4. Update and install any dependencies...
