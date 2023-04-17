@@ -23,7 +23,8 @@ mapGeneration::mapGeneration(ros::NodeHandle& node, const std::string &group_nam
 
 void mapGeneration::discretizeWorkspace(geometry_msgs::Pose& pose)
 {
-  reuleaux::Discretization* disc(new reuleaux::Discretization(pose,resolution_, radius_));
+  ROS_INFO("Discretizing workspace with resolution %f and radius %f", resolution_, radius_);
+  reuleaux::Discretization* disc(new reuleaux::Discretization(pose, resolution_, radius_));
   disc->discretize();
   disc->getInitialWorkspace(init_ws_);
   reuleaux::getPoseAndSphereSize(init_ws_, init_sp_size_, init_pose_size_);

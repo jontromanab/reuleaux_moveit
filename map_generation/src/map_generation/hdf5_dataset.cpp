@@ -248,6 +248,9 @@ bool Hdf5Dataset::saveMap(const VecVecDouble &pose_reach, const VecVecDouble &sp
   hsize_t attr_dims;
   float attr_data[1];
   attr_data[0] = resolution;
+  ROS_INFO("===================================");
+  ROS_INFO("WRITING RESOLUTION: %f", resolution);
+  ROS_INFO("===================================");
   attr_dims = 1;
   sphere_dataspace = H5Screate_simple(1, &attr_dims, NULL);
   this->attr_ = H5Acreate2(this->sphere_dataset_, "Resolution", H5T_NATIVE_FLOAT, sphere_dataspace,
@@ -295,7 +298,9 @@ bool Hdf5Dataset::saveWorkspaceToMap(const map_generation::WorkSpace &ws)
       pose_reach.push_back(pose_and_sphere);
     }
   }
-
+  ROS_INFO("===================================");
+  ROS_INFO("RETRIEVED WORKSPACE RESOLUTION: %f", ws.resolution);
+  ROS_INFO("===================================");
   saveMap(pose_reach, spheres, ri, ws.resolution);
 
   return true; // Maybe function ought to return void
