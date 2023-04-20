@@ -38,7 +38,7 @@ catkin_package(
       map_generation
       roscpp
   CATKIN_DEPENDS roscpp message_runtime
-  DEPENDS system_lib
+  DEPENDS system_lib #?
 )
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${OCTOMAP_INCLUDE_DIRS} ${HDF5_INCLUDE_DIR})
