@@ -1,60 +1,65 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="load_manipulator" default="true"/>   <!-- true = reachability | false = inverse reachability -->
+    <arg name="create_map" default="true"/>         <!-- true = create map | false = load map -->
+    <arg name="base_placement" default="false"/>    <!-- requires load_manipulator:=false -->
 
-    <arg name="load_panda" default="true"/>
-    <!-- Either create a map or load a map if this is set false -->
-    <arg name="create_map" default="true"/>
-    <arg name = "moveit_pkg" default="panda_moveit_config"/>
+    <arg name="moveit_pkg" default="panda_moveit_config"/>
+    <arg name="move_group" default="panda_arm"/>
+    <arg name="planning_frame" default="panda_link0"/>
+    <arg name="resolution" default="0.15"/>
 
-
-
-    <!-- Regardless of if we are creating a map or loading a map load the robot and it's MoveIt packages -->
-    <group if="$(arg load_panda)">
-        <!-- Load the Panda arm MoveIt! demo -->
+    <group if="$(arg load_manipulator)">    <!-- Map Creation -->
+        <!-- Load the manipulator MoveIt! demo -->
         <include file="$(find panda_moveit_config)/launch/demo.launch">
             <arg name="use_rviz" value="false" />
         </include>
 
-        <!--Launch moveit required pkgs for your robot-->
-        <!--
-        <include file="$(find map_generation)/launch/moveit_pkgs.launch">
-            <arg name="moveit_pkg" value="$(arg moveit_pkg)"/>
-        </include>
-        -->
+        <group if="$(arg create_map)">
+            <node name="map_gen" pkg="map_generation" type="map_generation_node" output="screen">
+              <param name="group_name" value="$(arg move_group)"/>
+              <param name="pkg_name" value="$(arg moveit_pkg)"/>
+              <param name="resolution" value="$(arg resolution)" />
+              <param name="radius" value="1" />
+              <param name="check_collision" value="true"/>
+              <param name="path" value="$(find map_generation)/maps/" />
+              <param name="filename" value="default" />
+            </node>
+        </group>
+
+
+
+        <group unless="$(arg create_map)">
+            <group unless="$(arg base_placement)">   <!-- Load and Visualise Reachability Map -->
+                <!-- Use the original Reuleaux package's map loader -->
+                <node pkg="map_creator" type="load_reachability_map" name="reachability_map_loader" args="$(find map_generation)/maps/$(arg move_group)_$(arg resolution)_reachability.h5" />
+
+                <!-- Reuleaux's load map doesn't use the same frame as the frame the map was created in for some reason, it forces base_link and isn't parameterised currently, so we need a static tf from the planning frame to the base_link frame -->
+                <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg planning_frame)_2_base_link" args="0 0 0 0 0 0 $(arg planning_frame) base_link" />
+                <node name="rviz" pkg="rviz" type="rviz" args="-d $(find map_generation)/config/panda_demo.rviz" />
+            </group>
+
+
+            <group if="$(arg base_placement)">   <!-- Load requirements for the base placement plugin -->
+                <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg planning_frame)_2_base_link" args="0 0 0 0 0 0 $(arg planning_frame) base_link" />
+                <node name="rviz" pkg="rviz" type="rviz" args="-d $(find map_generation)/config/base_placement_template.rviz" />
+            </group>
+        </group>
     </group>
 
 
 
-    <!-- Map Creation -->
-    <group if="$(arg create_map)">
-        <!--Node for map generation-->
-        <node name="map_gen" pkg="map_generation" type="map_generation_node" output="screen">
-          <param name="group_name" value="panda_arm" />
-          <param name="pkg_name" value="$(arg moveit_pkg)"/>
-          <param name="resolution" value="2" />
-          <param name="radius" value="1" />
-          <param name="check_collision" value="true"/>
-          <param name="path" value="$(find map_generation)/maps/" />
-          <param name="filename" value="default" />
-        </node>
+    <!-- If we are not using the manipulator then we are loading an inverse reachability map -->
+    <group unless="$(arg load_manipulator)">
+        <!-- Load and Visualise Inverse Reachability Map -->
+        <group unless="$(arg create_map)">
+            <!-- Reuleaux's load map doesn't use the same frame as the frame the map was created in for some reason, it forces base_link and isn't parameterised currently, so we need a static tf from the planning frame to the base_link frame -->
+            <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg planning_frame)_2_base_link" args="0 0 0 0 0 0 $(arg planning_frame) base_link" />
+
+            <!-- Use the original Reuleaux package's map loader -->
+            <node pkg="map_creator" type="load_reachability_map" name="reachability_map_loader" args="$(find map_generation)/maps/$(arg move_group)_$(arg resolution)_inverse_reachability.h5"/>
+
+            <node name="rviz" pkg="rviz" type="rviz" args="-d $(find map_generation)/config/panda_demo.rviz"/>
+        </group>
     </group>
-
-
-
-    <!-- Load and Visualise Map -->
-    <group unless="$(arg create_map)">
-    <!--<group if="$(arg load_map)">-->
-        <!-- Reuleaux's load map doesn't use the same frame as the frame the map was created in for some reason, it forces base_link and isn't parameterised currently, so we need a static tf from the panda origin to the base_link frame -->
-        <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_2_panda_link0" args="0 0 0 0 0 0 panda_link0 base_link" />
-
-        <!-- Use the original Reuleaux package's map loader -->
-        <node pkg="map_creator" type="load_reachability_map" name="reachability_map_loader" args="$(find map_generation)/maps/panda_panda_arm_0.15_reachability.h5" />
-        <!--<node pkg="map_creator" type="load_reachability_map" name="reachability_map_loader" args="$(find map_generation)/maps/panda_panda_arm_0.15_inverse_reachability.h5" />-->
-
-        <!-- RViz -->
-        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find map_generation)/config/panda_demo.rviz" />
-    </group>
-
-
-
 </launch>

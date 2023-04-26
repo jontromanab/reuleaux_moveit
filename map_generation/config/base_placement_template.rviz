@@ -3,8 +3,7 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /Global Options1
+      Expanded: ~
       Splitter Ratio: 0.5
     Tree Height: 719
   - Class: rviz/Selection
@@ -84,9 +83,9 @@ Visualization Manager:
       Queue Size: 10
       Shape: Sphere
       Shape Property:
-        Alpha: 1
+        Alpha: 0.5
         Color: 255; 225; 102
-        Size: 0.05000000074505806
+        Size: 0.15000000596046448
       Show Poses: false
       Show Shape: true
       Topic: /reachability_map
@@ -120,7 +119,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.956138610839844
+      Distance: 3.561248779296875
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -136,9 +135,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7903980016708374
+      Pitch: 0.5903981924057007
       Target Frame: <Fixed Frame>
-      Yaw: 0.7803980112075806
+      Yaw: 0.9253978729248047
     Saved: ~
 Window Geometry:
   Base Placement Plug-In:
