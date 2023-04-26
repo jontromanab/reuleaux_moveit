@@ -115,6 +115,7 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
+
         Robot Alpha: 0.5
         Show Robot Collision: false
         Show Robot Visual: true
