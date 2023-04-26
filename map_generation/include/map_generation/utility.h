@@ -1,10 +1,12 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include <boost/format.hpp>
 
 #include <geometry_msgs/Point.h>
 #include <geometry_msgs/Pose.h>
 #include "map_generation/WorkSpace.h"
+
 #include <iostream>
 
 namespace reuleaux

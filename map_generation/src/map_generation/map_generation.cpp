@@ -23,7 +23,8 @@ mapGeneration::mapGeneration(ros::NodeHandle& node, const std::string &group_nam
 
 void mapGeneration::discretizeWorkspace(geometry_msgs::Pose& pose)
 {
-  reuleaux::Discretization* disc(new reuleaux::Discretization(pose,resolution_, radius_));
+  ROS_INFO("Discretizing workspace with resolution %f and radius %f", resolution_, radius_);
+  reuleaux::Discretization* disc(new reuleaux::Discretization(pose, resolution_, radius_));
   disc->discretize();
   disc->getInitialWorkspace(init_ws_);
   reuleaux::getPoseAndSphereSize(init_ws_, init_sp_size_, init_pose_size_);
@@ -53,6 +54,7 @@ void mapGeneration::saveWorkspace()
   else
     filename = filename_;
   name = path_+filename;
+
   reuleaux::Hdf5Dataset* h5(new reuleaux::Hdf5Dataset(name));
   h5->save(filtered_ws_);
   ROS_INFO("%s saved to %s", filename.c_str(), path_.c_str());
@@ -76,6 +78,7 @@ void mapGeneration::generate()
   double dif2 = ros::Duration( ros::Time::now() - startit).toSec();
   filterWorkspace();
   double dif3 = ros::Duration( ros::Time::now() - startit).toSec();
+
   saveWorkspace();
   ROS_INFO("Time for discretizing workspace %.2lf seconds.", dif2);
   ROS_INFO("Center of workspace   x:%f, y:%f, z:%f", arm_pose_.position.x, arm_pose_.position.y, arm_pose_.position.z);
